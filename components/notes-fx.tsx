@@ -1,5 +1,3 @@
-/* Floating music notes rising from behind the player — decorative only. */
-
 const NOTES = [
   { x: "18%", y: "140px", size: 20, delay: "0s", duration: "9s", drift: "28px", rot: "24deg", opacity: 0.3 },
   { x: "26%", y: "220px", size: 14, delay: "2.2s", duration: "11s", drift: "-22px", rot: "-18deg", opacity: 0.22 },
