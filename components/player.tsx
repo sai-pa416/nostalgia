@@ -5,10 +5,6 @@ import { track } from "@vercel/analytics";
 import { playlists } from "@/lib/tracks";
 import type { Playlist, Track } from "@/lib/tracks";
 
-/* ---------------------------------------------------------------- */
-/* YouTube IFrame API typing (script is injected at runtime)         */
-/* ---------------------------------------------------------------- */
-
 declare global {
   interface Window {
     YT?: {
@@ -55,12 +51,6 @@ function loadYouTubeApi(): Promise<boolean> {
   });
   return apiPromise;
 }
-
-/* ---------------------------------------------------------------- */
-/* Helpers + module-scope sub-components (stable identities — the    */
-/* vinyl's CSS animation must never restart from 0deg).              */
-/* ---------------------------------------------------------------- */
-
 function fmtTime(totalSeconds: number): string {
   if (!Number.isFinite(totalSeconds) || totalSeconds <= 0) return "0:00";
   const m = Math.floor(totalSeconds / 60);
@@ -84,7 +74,7 @@ function Thumb({
     <div
       className={`${sizeClass} shrink-0 overflow-hidden rounded-2xl border border-white/10 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.7)]`}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
+      {}
       <img
         src={trackThumb(videoId)}
         alt=""
@@ -259,11 +249,6 @@ function PlayPauseButton({
     </button>
   );
 }
-
-/* ---------------------------------------------------------------- */
-/* Right-side track list — click any song to play it                 */
-/* ---------------------------------------------------------------- */
-
 function TrackList({
   playlists,
   playlistIndex,
@@ -363,11 +348,6 @@ function TrackList({
     </div>
   );
 }
-
-/* ---------------------------------------------------------------- */
-/* Player engine — hidden YouTube IFrame (IFrame Player API)         */
-/* ---------------------------------------------------------------- */
-
 export default function Player() {
   const apiHostRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<YTPlayer | null>(null);
@@ -406,9 +386,7 @@ export default function Player() {
     }
   }, []);
 
-  /* -- boot: inject the IFrame API, then mount the hidden player -- */
-
-  useEffect(() => {
+    useEffect(() => {
     let mounted = true;
     loadYouTubeApi().then(() => {
       if (!mounted || !apiHostRef.current || !window.YT?.Player) return;
@@ -469,7 +447,7 @@ export default function Player() {
     };
   }, [loadTrack]);
 
-  /* -- progress polling (the IFrame API has no timeupdate event) -- */
+ 
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -497,7 +475,7 @@ export default function Player() {
       p.seekTo(clamped, true);
       setProgress(clamped);
     } catch {
-      /* player not ready */
+      
     }
   }, [duration]);
 
@@ -514,7 +492,7 @@ export default function Player() {
         pendingPlayRef.current = false;
       }
     } catch {
-      /* player not ready */
+     
     }
   }, []);
 
@@ -535,10 +513,7 @@ export default function Player() {
     [loadTrack]
   );
 
-  /* ---------------------------------------------------------------- */
-  /* Layouts                                                           */
-  /* ---------------------------------------------------------------- */
-
+ 
   const trackList = (
     <TrackList
       playlists={playlists}
@@ -551,12 +526,12 @@ export default function Player() {
 
   return (
     <div className="w-full max-w-xl">
-      {/* Right-side song list — desktop */}
+      {}
       <div className="fixed right-5 top-1/2 z-20 hidden w-72 -translate-y-1/2 shrink-0 lg:block">
         {trackList}
       </div>
 
-      {/* Hidden off-screen host for the YouTube iframe (audio-only).   */}
+      {}
       <div
         ref={apiHostRef}
         aria-hidden
@@ -569,7 +544,7 @@ export default function Player() {
         </span>
       </div>
 
-      {/* DESKTOP — square glass card */}
+      {}
       <div className="hidden items-center gap-5 rounded-3xl border border-white/[0.08] bg-white/[0.03] p-5 pr-6 shadow-[0_24px_64px_-16px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.15)] backdrop-blur-2xl sm:flex">
         <Thumb videoId={currentTrack.videoId} sizeClass="h-28 w-28" />
 
@@ -590,7 +565,7 @@ export default function Player() {
         </div>
       </div>
 
-      {/* MOBILE — stacked glass card */}
+      {}
       <div className="rounded-[26px] border border-white/[0.08] bg-white/[0.03] p-4 shadow-[0_16px_48px_-12px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.15)] backdrop-blur-2xl sm:hidden">
         <div className="flex items-center gap-3.5">
           <Thumb videoId={currentTrack.videoId} sizeClass="h-20 w-20" />
@@ -611,7 +586,7 @@ export default function Player() {
         </div>
       </div>
 
-      {/* Song list — mobile (inline under the player) */}
+      {}
       <div className="mt-3 lg:hidden">{trackList}</div>
     </div>
   );
