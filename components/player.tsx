@@ -367,7 +367,7 @@ export default function Player() {
     playlists[playlistIndex].tracks[trackIndex] ?? playlists[0].tracks[0];
   const wired = Boolean(currentTrack?.videoId);
 
-  /* -- imperative engine refs so API callbacks always see fresh state -- */
+  
 
   const loadTrack = useCallback((pi: number, ti: number, autoplay: boolean) => {
     const t = playlists[pi]?.tracks[ti];
@@ -459,7 +459,7 @@ export default function Player() {
         const d = p.getDuration();
         if (Number.isFinite(d) && d > 0) setDuration(d);
       } catch {
-        /* player not ready */
+       
       }
     }, 500);
     return () => window.clearInterval(timer);
