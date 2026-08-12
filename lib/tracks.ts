@@ -4,9 +4,6 @@ export type Track = {
   artist: string;
   film?: string;
   year?: number;
-  /** YouTube video id of an upload you have the right to embed
-   *  (your own upload, or the rights holder's channel with embedding enabled).
-   *  Empty string = track is parked; the player skips it and shows a hint. */
   videoId: string;
 };
 
@@ -59,42 +56,3 @@ export const playlists: Playlist[] = [
     ],
   },
 ];
-
-/*
- * PARKED TRACKS — paste a videoId to bring one back (one line per song).
- * Only use uploads you have the right to embed (your own, or the rights
- * holder's own channel with embedding enabled).
- *
-  { id: "p1", title: "Love Me Not", artist: "Ravyn Lenae", videoId: "" },
-  { id: "p2", title: "Headlights (feat. KIDDO) - Slowed", artist: "Alok, Alan Walker, KIDDO", videoId: "" },
-  { id: "p3", title: "I Wanna Be Yours", artist: "Arctic Monkeys", videoId: "" },
-  { id: "p4", title: "People", artist: "Libianca", videoId: "" },
-  { id: "p5", title: "Ghost of Chicago", artist: "Noah Floersch", videoId: "" },
-  { id: "p6", title: "Golden Brown - Sped Up Version", artist: "The Stranglers", videoId: "" },
-  { id: "p7", title: "this is what winter feels like", artist: "JVKE", videoId: "" },
-  { id: "p8", title: "Notion", artist: "The Rare Occasions", videoId: "" },
-  { id: "p9", title: "back to friends", artist: "sombr", videoId: "" },
-  { id: "p10", title: "The Night We Met", artist: "Lord Huron", videoId: "" },
-  { id: "p11", title: "Attention", artist: "Charlie Puth", videoId: "" },
-  { id: "p12", title: "Sailor Song", artist: "Gigi Perez", videoId: "" },
-  { id: "p13", title: "Dernière danse", artist: "Indila", videoId: "" },
-  { id: "p14", title: "blue", artist: "yung kai", videoId: "" },
-  { id: "p15", title: "We Don't Talk Anymore (feat. Selena Gomez)", artist: "Charlie Puth, Selena Gomez", videoId: "" },
-  { id: "p16", title: "this is what autumn feels like", artist: "JVKE", videoId: "" },
-  { id: "p17", title: "Those Eyes", artist: "New West", videoId: "" },
-  { id: "p18", title: "No Lie", artist: "Sean Paul, Dua Lipa", videoId: "" },
-  { id: "p19", title: "Dandelions", artist: "Ruth B.", videoId: "" },
-  { id: "p20", title: "No One Noticed", artist: "The Marías", videoId: "" },
-  { id: "p21", title: "Counting Stars", artist: "OneRepublic", videoId: "" },
-  { id: "p22", title: "WILDFLOWER", artist: "Billie Eilish", videoId: "" },
-  { id: "p23", title: "Heat Waves - Slowed", artist: "Glass Animals", videoId: "" },
-  { id: "p24", title: "Love Story", artist: "Indila", videoId: "" },
-  { id: "p25", title: "Numb Little Bug - Piano Version", artist: "Em Beihold", videoId: "" },
-  { id: "p26", title: "Come Home", artist: "Jace June", videoId: "" },
-  { id: "p27", title: "I Thought I Saw Your Face Today", artist: "She & Him", videoId: "" },
-  { id: "p28", title: "From The Start", artist: "Laufey", videoId: "" },
-  { id: "p29", title: "her", artist: "JVKE", videoId: "" },
-  { id: "p30", title: "double take", artist: "Dhruv", videoId: "" },
-  { id: "p31", title: "Until I Found You (with Em Beihold)", artist: "Stephen Sanchez, Em Beihold", videoId: "" },
-  { id: "p32", title: "If We Have Each Other", artist: "Alec Benjamin", videoId: "" },
- */
