@@ -29,6 +29,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+dev-server.log
+
+# local music files (site streams from YouTube)
+/public/music/
 
 # env files (can opt-in for committing if needed)
 .env*

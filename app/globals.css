@@ -1,26 +1,96 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-accent: #f59e0b;
+  --color-accent-deep: #f97316;
+  --color-cream: #f5e9d8;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-f), var(--font-geist-sans), sans-serif;
+  --font-mono: var(--font-mono-f), ui-monospace, "Cascadia Mono", "Courier New", monospace;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-blink: blink 1s step-end infinite;
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #0a0908;
+  color: var(--color-cream);
+}
+
+::selection {
+  background: rgba(245, 158, 11, 0.35);
+  color: #fff;
+}
+
+/* Full-screen backdrop: landscape art, portrait swap at the breakpoint */
+.hero-bg {
+  background-image: url("/bg/scene-wide.png");
+  background-size: cover;
+  background-position: center;
+}
+
+@media (orientation: portrait) {
+  .hero-bg {
+    background-image: url("/bg/scene-tall.png");
+    background-position: center 30%;
+  }
+}
+
+/* Film-grain overlay (feTurbulence) */
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+/* Equalizer bars in the track list — bounced in place of the index number */
+@keyframes eq-bounce {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.eq-bar {
+  transform-origin: bottom;
+  animation: eq-bounce 0.9s ease-in-out infinite;
+}
+
+/* Floating music notes rising from behind the player */
+@keyframes note-float {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(0.85);
+    opacity: 0;
+  }
+  12% {
+    opacity: var(--note-opacity, 0.4);
+  }
+  85% {
+    opacity: var(--note-opacity, 0.4);
+  }
+  100% {
+    transform: translate3d(var(--note-drift, 24px), -300px, 0)
+      rotate(var(--note-rot, 22deg)) scale(1.05);
+    opacity: 0;
+  }
+}
+
+.note {
+  position: absolute;
+  bottom: var(--note-y, 110px);
+  left: var(--note-x, 50%);
+  transform-origin: center;
+  animation: note-float var(--note-duration, 9s) linear infinite;
+  animation-delay: var(--note-delay, 0s);
+  will-change: transform, opacity;
+  pointer-events: none;
+  user-select: none;
 }
